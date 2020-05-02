@@ -11,7 +11,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +24,6 @@ public class TouHouFight implements ModInitializer {
     public static final Logger log = LogManager.getLogger();
 
     private static int num;
-
     public static boolean isPlay;
 
     public static <T extends IPacket> void registerPacket(Identifier id, Class<T> packetClass) {
@@ -41,14 +41,23 @@ public class TouHouFight implements ModInitializer {
     }
 
     public static void onServerQuit() {
+        if (MinecraftClient.getInstance().player != null)
+            CustomModelClient.manager.clearModel(MinecraftClient.getInstance().player.getGameProfile());
         isPlay = false;
+    }
+
+    public static void update() {
+        InGameHud hud = MinecraftClient.getInstance().inGameHud;
+        TextRenderer textRenderer = hud.getFontRenderer();
+        textRenderer.drawWithShadow("test", 50, 50, 0xffffff);
     }
 
     public static void onClicentPacket(final String message) {
         if (message.equals("start")) {
             isPlay = true;
+            update();
         } else if (message.startsWith("stop")) {
-            isPlay = false;
+            onServerQuit();
         } else if (message.startsWith("[mode]")) {
             String mo = message.replace("[mode]", "");
             ModelLoadInfo info = CustomModel.manager.models.get(mo);
