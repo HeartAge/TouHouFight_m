@@ -43,7 +43,7 @@ public class Key {
         Shot = FabricKeyBinding.Builder.create(
                 new Identifier(TouHouFight.modID, "shot"),
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_MOUSE_BUTTON_LEFT,
+                GLFW.GLFW_MOUSE_BUTTON_1,
                 TouHouFight.modID
         ).build();
         KeyBindingRegistry.INSTANCE.register(Ex1);

@@ -1,6 +1,5 @@
 package Color_yr.TouHouFight.Pack;
 
-import Color_yr.TouHouFight.TouHouFight;
 import net.minecraft.util.PacketByteBuf;
 
 public class GetPack implements IPacket {

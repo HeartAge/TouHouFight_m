@@ -45,22 +45,19 @@ public class TouHouFight implements ModInitializer {
     }
 
     public static void onClicentPacket(final String message) {
-        final Thread asyncThread = new Thread(() -> {
-            if (message.equals("start")) {
-                isPlay = true;
-            } else if (message.startsWith("stop")) {
-                isPlay = false;
-            } else if (message.startsWith("[mode]")) {
-                String mo = message.replace("[mode]", "");
-                ModelLoadInfo info = CustomModel.manager.models.get(mo);
-                if (info == null) {
-                    log.info(mo + " is null");
-                    return;
-                }
-                CustomModelClient.manager.loadModel(MinecraftClient.getInstance().player.getUuid(), mo);
+        if (message.equals("start")) {
+            isPlay = true;
+        } else if (message.startsWith("stop")) {
+            isPlay = false;
+        } else if (message.startsWith("[mode]")) {
+            String mo = message.replace("[mode]", "");
+            ModelLoadInfo info = CustomModel.manager.models.get(mo);
+            if (info == null) {
+                log.info(mo + " is null");
+                return;
             }
-        });
-        asyncThread.start();
+            CustomModelClient.manager.selectModel(MinecraftClient.getInstance().player.getGameProfile(), mo);
+        }
     }
 
     @Override
