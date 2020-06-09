@@ -14,7 +14,7 @@ public class Key {
     public static FabricKeyBinding Kill;
     public static FabricKeyBinding Shot;
 
-    public Key() {
+    public void init() {
         KeyBindingRegistry.INSTANCE.addCategory(TouHouFight.modID);
         Ex1 = FabricKeyBinding.Builder.create(
                 new Identifier(TouHouFight.modID, "ex1"),

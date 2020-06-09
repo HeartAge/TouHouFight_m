@@ -1,6 +1,6 @@
 package Color_yr.TouHouFight.mixin;
 
-import Color_yr.TouHouFight.TouHouFight;
+import Color_yr.TouHouFight.Hud.HudShow;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GuiShow {
     @Inject(method = "render", at = @At("TAIL"))
     public void Gui(CallbackInfo info) {
-        TouHouFight.update();
+        HudShow.Show();
     }
 }
