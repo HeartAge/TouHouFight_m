@@ -9,6 +9,6 @@ public class HudShow {
     public static void Show() {
         InGameHud hud = MinecraftClient.getInstance().inGameHud;
         TextRenderer textRenderer = hud.getFontRenderer();
-        textRenderer.drawWithShadow("test", 50, 50, 0xffffff);
+        textRenderer.drawWithShadow("血量", 50, 50, 0xffffff);
     }
 }
